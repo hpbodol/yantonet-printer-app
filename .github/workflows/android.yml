@@ -10,21 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4 # Versi diperbarui
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v4 # Versi diperbarui
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
 
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v3 # Versi diperbarui
+      uses: gradle/gradle-build-action@v3
       with:
+        # BARIS BARU: Memberitahu untuk menggunakan Gradle versi 7.6
+        gradle-version: '7.6'
         arguments: :app:assembleDebug
 
     - name: Upload APK as Artifact
-      uses: actions/upload-artifact@v4 # Versi diperbarui (INI YANG PALING PENTING)
+      uses: actions/upload-artifact@v4
       with:
         name: yantonet-printer-app-debug.apk
         path: app/build/outputs/apk/debug/app-debug.apk
