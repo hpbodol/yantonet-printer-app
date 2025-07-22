@@ -3,8 +3,7 @@ name: Build YantoNet Printer APK
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch: # Menambahkan pemicu manual
 
 jobs:
   build:
@@ -19,15 +18,11 @@ jobs:
         distribution: 'temurin'
         java-version: '11'
 
-    - name: Set up Gradle
+    - name: Set up Gradle and build
       uses: gradle/gradle-build-action@v2
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-
-    - name: Build debug APK
-      run: ./gradlew assembleDebug
-      working-directory: ./app
+      with:
+        # Perintah untuk membangun APK debug
+        arguments: :app:assembleDebug
 
     - name: Upload APK as Artifact
       uses: actions/upload-artifact@v3
