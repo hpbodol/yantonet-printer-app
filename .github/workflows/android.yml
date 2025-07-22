@@ -18,12 +18,15 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    # Langkah "Mata-mata": Menampilkan semua file yang ada
+    - name: List files in the repository
+      run: ls -R
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v3
       with:
-        # BARIS BARU: Memberitahu untuk menggunakan Gradle versi 7.6
         gradle-version: '7.6'
-        arguments: :app:assembleDebug
+        arguments: app:assembleDebug
 
     - name: Upload APK as Artifact
       uses: actions/upload-artifact@v4
